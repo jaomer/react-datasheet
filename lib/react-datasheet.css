@@ -90,3 +90,11 @@ span.data-grid-container, span.data-grid-container:focus {
 .data-grid-container .data-grid .cell .value-viewer, .data-grid-container .data-grid .cell .data-editor {
   display: block;
 }
+
+
+.data-grid-head-tr-th {
+  background-color: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.2);
+  user-select: none;
+  padding: 0 5px 0 5px;
+}

@@ -65,8 +65,11 @@ export default class DataSheet extends PureComponent {
       forceEdit: false,
       editing: {},
       clear: {},
+      data: {}
     };
     this.state = this.defaultState;
+
+    
 
     this.removeAllListeners = this.removeAllListeners.bind(this);
     this.handleIEClipboardEvents = this.handleIEClipboardEvents.bind(this);
@@ -491,6 +494,9 @@ export default class DataSheet extends PureComponent {
         if (newLocation) {
           this.updateLocationSingleCell(newLocation);
         }
+        else if(start.i+1>=data.length) {
+          this.props.onRowAdd()
+        }
       }
       e.preventDefault();
     }
@@ -646,8 +652,19 @@ export default class DataSheet extends PureComponent {
       className,
       overflow,
       data,
+      headerNames,
       keyFn,
+      onRowAdd
     } = this.props;
+
+    if(data.length>this.state.data.length) {
+      this.updateLocationSingleCell({i:data.length-1, j:0})
+    }
+
+    this._setState({data: this.props.data})
+    console.log(this.props.data)
+    console.log(this.state.data)
+
     const { forceEdit } = this.state;
     return (
       <span
@@ -663,6 +680,7 @@ export default class DataSheet extends PureComponent {
           className={['data-grid', className, overflow]
             .filter(a => a)
             .join(' ')}
+          headerNames={headerNames}
         >
           {data.map((row, i) => (
             <RowRenderer key={keyFn ? keyFn(i) : i} row={i} cells={row}>
@@ -738,6 +756,7 @@ DataSheet.propTypes = {
   parsePaste: PropTypes.func,
   attributesRenderer: PropTypes.func,
   keyFn: PropTypes.func,
+  onRowAdd: PropTypes.func,
   handleCopy: PropTypes.func,
 };
 

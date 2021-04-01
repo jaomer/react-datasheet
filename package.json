@@ -75,9 +75,7 @@
     "types"
   ],
   "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged --pattern '**/*.*(js|jsx)'"
-    }
+    
   },
   "main": "lib/index.js",
   "types": "types/react-datasheet.d.ts"
