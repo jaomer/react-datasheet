@@ -74,9 +74,10 @@
     "lib",
     "types"
   ],
-  "husky": {
-    
-  },
+  "husky": {},
   "main": "lib/index.js",
-  "types": "types/react-datasheet.d.ts"
+  "types": "types/react-datasheet.d.ts",
+  "dependencies": {
+    "@material-ui/icons": "^4.11.2"
+  }
 }

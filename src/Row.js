@@ -5,7 +5,10 @@ import CellShape from './CellShape';
 
 class Row extends PureComponent {
   render() {
-    return <tr>{this.props.children}</tr>;
+    return <tr>
+      <td className="cell cell-number">{this.props.row}</td>
+      {this.props.children}
+    </tr>;
   }
 }
 

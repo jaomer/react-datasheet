@@ -35,7 +35,25 @@ export default class Cell extends PureComponent {
         style={style}
         {...attributes}
       >
+          
+          {
+            (this.props.selected) && (
+              <svg className="cell-selected-svg">
+                <rect x="1.5" y="1.5" className="cell-selected-rect"/>
+                {
+                  this.props.editing && (
+                    <rect x="1.5" y="1.5" className="cell-editing-rect"/>
+                  )
+                }
+              </svg>              
+            )
+          }
         {this.props.children}
+        {
+            this.props.selected && (
+              <div className="cell-border-div"></div>              
+            )
+          }
       </td>
     );
   }
