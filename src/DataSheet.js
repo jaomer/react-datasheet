@@ -662,8 +662,6 @@ export default class DataSheet extends PureComponent {
     }
 
     this._setState({data: this.props.data})
-    console.log(this.props.data)
-    console.log(this.state.data)
 
     const { forceEdit } = this.state;
     return (

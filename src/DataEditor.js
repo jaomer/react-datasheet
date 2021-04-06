@@ -20,7 +20,8 @@ export default class DataEditor extends PureComponent {
   render() {
     const { value, onKeyDown } = this.props;
     return (
-      <input
+      <span className="data-editor-container">
+        <input
         ref={input => {
           this._input = input;
         }}
@@ -29,6 +30,7 @@ export default class DataEditor extends PureComponent {
         onChange={this.handleChange}
         onKeyDown={onKeyDown}
       />
+      </span>
     );
   }
 }
