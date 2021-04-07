@@ -9,6 +9,7 @@ import ValueViewer from './ValueViewer';
 import {
   TAB_KEY,
   ENTER_KEY,
+  F2_KEY,
   DELETE_KEY,
   ESCAPE_KEY,
   BACKSPACE_KEY,
@@ -73,6 +74,15 @@ export default class DataSheet extends PureComponent {
 
     this.removeAllListeners = this.removeAllListeners.bind(this);
     this.handleIEClipboardEvents = this.handleIEClipboardEvents.bind(this);
+  }
+
+  getCellBorders(i, j) {
+    return [
+      (i===Math.min(this.state.start.i, this.state.end.i)),
+      (j===Math.max(this.state.start.j, this.state.end.j)),
+      (i===Math.max(this.state.start.i, this.state.end.i)),
+      (j===Math.min(this.state.start.j, this.state.end.j)),
+    ]
   }
 
   removeAllListeners() {
@@ -298,7 +308,8 @@ export default class DataSheet extends PureComponent {
       this.handleNavigate(e, { i: -1, j: 0 });
     } else if (keyCode === DOWN_KEY) {
       this.handleNavigate(e, { i: 1, j: 0 });
-    } else if (commit && keyCode === ENTER_KEY) {
+    // } else if (commit && keyCode === ENTER_KEY) {
+    } else if (keyCode === ENTER_KEY) {
       this.handleNavigate(e, { i: e.shiftKey ? -1 : 1, j: 0 });
     }
   }
@@ -315,6 +326,7 @@ export default class DataSheet extends PureComponent {
     const deleteKeysPressed =
       keyCode === DELETE_KEY || keyCode === BACKSPACE_KEY;
     const enterKeyPressed = keyCode === ENTER_KEY;
+    const f2KeyPressed = keyCode === F2_KEY;
     const numbersPressed = keyCode >= 48 && keyCode <= 57;
     const lettersPressed = keyCode >= 65 && keyCode <= 90;
     const latin1Supplement = keyCode >= 160 && keyCode <= 255;
@@ -340,7 +352,7 @@ export default class DataSheet extends PureComponent {
         e.preventDefault();
         this.clearSelectedCells(start, end);
       } else if (currentCell && !currentCell.readOnly) {
-        if (enterKeyPressed) {
+        if (f2KeyPressed) {
           this._setState({ editing: start, clear: {}, forceEdit: true });
           e.preventDefault();
         } else if (
@@ -689,6 +701,8 @@ export default class DataSheet extends PureComponent {
                     key={cell.key ? cell.key : `${i}-${j}`}
                     row={i}
                     col={j}
+                    borders={this.getCellBorders(i,j)}
+                    isStart={(this.state.start.i === i && this.state.start.j === j)}
                     cell={cell}
                     forceEdit={false}
                     onMouseDown={this.onMouseDown}

@@ -185,6 +185,8 @@ export default class DataCell extends PureComponent {
     const {
       row,
       col,
+      borders,
+      isStart,
       cell,
       cellRenderer: CellRenderer,
       valueRenderer,
@@ -218,6 +220,8 @@ export default class DataCell extends PureComponent {
       <CellRenderer
         row={row}
         col={col}
+        borders={borders}
+        isStart={isStart}
         cell={cell}
         selected={selected}
         editing={editing}
@@ -240,6 +244,8 @@ export default class DataCell extends PureComponent {
 DataCell.propTypes = {
   row: PropTypes.number.isRequired,
   col: PropTypes.number.isRequired,
+  borders: PropTypes.array,
+  isStart: PropTypes.bool,
   cell: PropTypes.shape(CellShape).isRequired,
   forceEdit: PropTypes.bool,
   selected: PropTypes.bool,

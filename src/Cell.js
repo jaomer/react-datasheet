@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import CellShape from './CellShape';
+import clsx from 'clsx';
 
 export default class Cell extends PureComponent {
   render() {
@@ -22,9 +23,11 @@ export default class Cell extends PureComponent {
       ? attributesRenderer(cell, row, col)
       : {};
 
+    const cellBorderClasses = this.props.borders.map((v,i) => {if(v) {return `cell-border-div-${i}`}}).filter(Boolean).join(" ")
+
     return (
       <td
-        className={className}
+        className={clsx(className,this.props.selected && !this.props.isStart && 'cell-selected-not-start')}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
@@ -37,7 +40,7 @@ export default class Cell extends PureComponent {
       >
           
           {
-            (this.props.selected) && (
+            (this.props.selected && this.props.borders[1] && this.props.borders[2]) && (
               <svg className="cell-selected-svg">
                 <rect x="1.5" y="1.5" className="cell-selected-rect"/>
                 {
@@ -51,7 +54,7 @@ export default class Cell extends PureComponent {
         {this.props.children}
         {
             this.props.selected && (
-              <div className="cell-border-div"></div>              
+              <div className={`cell-border-div ${cellBorderClasses}`}></div>              
             )
           }
       </td>
@@ -62,6 +65,8 @@ export default class Cell extends PureComponent {
 Cell.propTypes = {
   row: PropTypes.number.isRequired,
   col: PropTypes.number.isRequired,
+  borders: PropTypes.array,
+  isStart: PropTypes.bool,
   cell: PropTypes.shape(CellShape).isRequired,
   selected: PropTypes.bool,
   editing: PropTypes.bool,

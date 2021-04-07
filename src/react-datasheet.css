@@ -9,7 +9,7 @@ span.data-grid-container, span.data-grid-container:focus {
 } 
 
 .data-grid-container .data-grid .cell.updated {
-    background-color: rgba(0, 145, 253, 0.16);
+    /* background-color: rgba(0, 145, 253, 0.16); */
     transition : background-color 0ms ease ;
 }
 .data-grid-container .data-grid .cell {
@@ -21,7 +21,7 @@ span.data-grid-container, span.data-grid-container:focus {
   -ms-user-select: none;
   cursor: cell;
   background-color: unset;
-  transition : background-color 500ms ease;
+  /* transition : background-color 500ms ease; */
   vertical-align: middle;
   /* text-align: right; */
   text-align: left;
@@ -152,8 +152,24 @@ span.data-grid-container, span.data-grid-container:focus {
   position: absolute;
   width: calc(100% + 3px);
   height: calc(100% + 3px);
-  border: 3px solid #217346;
+  
   transform: translate(-1.5px, 1.5px) translate(0%,-100%);
+}
+
+.cell-border-div.cell-border-div-0 {
+  border-top: 3px solid #217346;
+}
+
+.cell-border-div.cell-border-div-1 {
+  border-right: 3px solid #217346;
+}
+
+.cell-border-div.cell-border-div-2 {
+  border-bottom: 3px solid #217346;
+}
+
+.cell-border-div.cell-border-div-3 {
+  border-left: 3px solid #217346;
 }
 
 .cell-selected-svg {
@@ -181,4 +197,8 @@ span.data-grid-container, span.data-grid-container:focus {
   fill: white;
   stroke-width: 1;
   stroke:white;
+}
+
+.cell.selected.cell-selected-not-start {
+  background-color: #c6c6c6;
 }
