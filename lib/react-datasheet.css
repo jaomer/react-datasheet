@@ -4,8 +4,9 @@ span.data-grid-container, span.data-grid-container:focus {
 }
 
 .data-grid-container .data-grid {
-  table-layout: fixed;
+  /* table-layout: fixed; */
   border-collapse: collapse;
+  width: 100%;
 } 
 
 .data-grid-container .data-grid .cell.updated {

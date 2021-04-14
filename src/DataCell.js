@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, {createRef, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -43,6 +43,10 @@ export default class DataCell extends PureComponent {
     this.handleContextMenu = this.handleContextMenu.bind(this);
     this.handleDoubleClick = this.handleDoubleClick.bind(this);
 
+    this.cellRef = React.createRef();
+
+    
+
     this.state = {
       updated: false,
       reverting: false,
@@ -52,16 +56,20 @@ export default class DataCell extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
+    if(!this.cellWidth) {this.cellWidth = (this.cellRef && this.cellRef.current) ? this.cellRef.current.offsetWidth : undefined} // this sets the initial value
+    
     if (
       !this.props.cell.disableUpdatedFlag &&
       initialValue(prevProps) !== initialValue(this.props)
     ) {
-      this.setState({ updated: true });
+      this.cellWidth = undefined
+      this.setState({ updated: true, cellWidth: undefined });
       this.timeout = setTimeout(() => this.setState({ updated: false }), 700);
     }
     if (this.props.editing === true && prevProps.editing === false) {
+      console.log('editing')
       const value = this.props.clearing ? '' : initialData(this.props);
-      this.setState({ value, reverting: false });
+      this.setState({ value, cellWidth: this.cellWidth, reverting: false });
     }
 
     if (
@@ -72,6 +80,8 @@ export default class DataCell extends PureComponent {
       this.state.value !== initialData(this.props)
     ) {
       this.props.onChange(this.props.row, this.props.col, this.state.value);
+      
+      
     }
   }
 
@@ -228,12 +238,13 @@ export default class DataCell extends PureComponent {
         updated={updated}
         attributesRenderer={attributesRenderer}
         className={className}
-        style={widthStyle(cell)}
+        style={widthStyle(Object.assign({},cell,{width: this.state.cellWidth ? this.state.cellWidth : cell.width}))}
         onMouseDown={this.handleMouseDown}
         onMouseOver={this.handleMouseOver}
         onDoubleClick={this.handleDoubleClick}
         onContextMenu={this.handleContextMenu}
         onKeyUp={onKeyUp}
+        fwdRef={this.cellRef}
       >
         {content}
       </CellRenderer>

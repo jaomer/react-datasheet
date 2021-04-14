@@ -57,9 +57,9 @@
     "prettier-quick": "0.0.5",
     "pretty-quick": "^2.0.1",
     "prop-types": "^15.7.2",
-    "react": "^15.0.0",
+    "react": "^17.0.2",
     "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^15.0.0",
+    "react-dom": "^17.0.2",
     "rimraf": "^2.6.1",
     "shx": "^0.3.3",
     "sinon": "^1.17.3",
@@ -79,6 +79,7 @@
   "types": "types/react-datasheet.d.ts",
   "dependencies": {
     "@material-ui/icons": "^4.11.2",
-    "clsx": "^1.1.1"
+    "clsx": "^1.1.1",
+    "react-update": "^0.4.4"
   }
 }

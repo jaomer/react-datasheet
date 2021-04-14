@@ -16,8 +16,9 @@ export default class Cell extends PureComponent {
       onMouseOver,
       onDoubleClick,
       onContextMenu,
+      
     } = this.props;
-
+    
     const { colSpan, rowSpan } = cell;
     const attributes = attributesRenderer
       ? attributesRenderer(cell, row, col)
@@ -37,6 +38,7 @@ export default class Cell extends PureComponent {
         rowSpan={rowSpan}
         style={style}
         {...attributes}
+        ref={this.props.fwdRef}
       >
           
           {
@@ -78,6 +80,7 @@ Cell.propTypes = {
   onContextMenu: PropTypes.func.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
+  
 };
 
 Cell.defaultProps = {
