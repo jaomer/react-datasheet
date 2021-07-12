@@ -666,9 +666,10 @@ export default class DataSheet extends PureComponent {
       data,
       headerNames,
       keyFn,
-      onRowAdd
+      onRowAdd,
+      hideColumns
     } = this.props;
-
+    
     if(data.length>this.state.data.length) {
       this.updateLocationSingleCell({i:data.length-1, j:0})
     }
@@ -690,14 +691,18 @@ export default class DataSheet extends PureComponent {
           className={['data-grid', className, overflow]
             .filter(a => a)
             .join(' ')}
+          // headerNames={headerNames.filter((v,i) => {return !hideColumns || hideColumns.indexOf(i)===-1})}
           headerNames={headerNames}
+          hideColumns={hideColumns}
         >
           {data.map((row, i) => (
             <RowRenderer key={keyFn ? keyFn(i) : i} row={i} cells={row}>
+              {/* {row.filter((v,i) => {return hideColumns.indexOf(i)===-1}).map((cell, j) => { */}
               {row.map((cell, j) => {
                 const isEditing = this.isEditing(i, j);
                 return (
                   <DataCell
+                    hideColumn={hideColumns.indexOf(j)>-1}
                     key={cell.key ? cell.key : `${i}-${j}`}
                     row={i}
                     col={j}
@@ -770,6 +775,7 @@ DataSheet.propTypes = {
   keyFn: PropTypes.func,
   onRowAdd: PropTypes.func,
   handleCopy: PropTypes.func,
+  hideColumns: PropTypes.array
 };
 
 DataSheet.defaultProps = {

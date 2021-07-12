@@ -1,6 +1,7 @@
 import React, {createRef, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+
 import {
   ENTER_KEY,
   ESCAPE_KEY,
@@ -222,6 +223,7 @@ export default class DataCell extends PureComponent {
       editing && 'editing',
       cell.readOnly && 'read-only',
       updated && 'updated',
+      this.props.hideColumn && 'hide-cell'
     ]
       .filter(a => a)
       .join(' ');
@@ -277,6 +279,7 @@ DataCell.propTypes = {
   onChange: PropTypes.func.isRequired,
   onRevert: PropTypes.func.isRequired,
   onEdit: PropTypes.func,
+  hideColumn: PropTypes.bool
 };
 
 DataCell.defaultProps = {
@@ -285,4 +288,5 @@ DataCell.defaultProps = {
   editing: false,
   clearing: false,
   cellRenderer: Cell,
+  hideColumn: false
 };

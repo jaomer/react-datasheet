@@ -45,7 +45,7 @@ span.data-grid-container, span.data-grid-container:focus {
 }
 
 .data-editor-container {
-  width: 100%;
+  /* width: 100%; */
   display: block;
   position: relative;
   z-index: 99;
@@ -202,4 +202,8 @@ span.data-grid-container, span.data-grid-container:focus {
 
 .cell.selected.cell-selected-not-start {
   background-color: #c6c6c6;
+}
+
+.hide-cell {
+  display: none;
 }
