@@ -51,6 +51,10 @@ span.data-grid-container, span.data-grid-container:focus {
   z-index: 99;
 }
 
+input.data-editor {
+  outline: none;
+}
+
 .data-grid-container .data-grid .cell.editing .data-editor {
   position: absolute;
   transform: translate(0%,-100%);
